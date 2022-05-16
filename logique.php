@@ -15,14 +15,33 @@
         'category' => '',
         'content' => '',
     ];
-    $articles = [];
+    $category = '';
+
+    if(file_exists($filename))
+    {
+        $articles = json_decode(file_get_contents($filename), true) ?? [];
+    }
+    
+    $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    //print_r($_GET);
+    $id = $_GET['id'] ?? '';
+    //print_r($id);
+    if($id)
+    {
+        
+        $articleindex = array_search($id, array_column($articles, 'id'));
+        $article = $articles[$articleindex];
+        //print_r($article);
+        $title = $article['title'];
+        $image = $article['image'];
+        $category = $article['category'];
+        $content = $article['content'];
+        //echo $content;
+    }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        if(file_exists($filename))
-        {
-            $articles = json_decode(file_get_contents($filename), true) ?? [];
-        }
+
         $_POST = filter_input_array(INPUT_POST,[
             'title' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
             'image' => FILTER_SANITIZE_URL,
@@ -67,14 +86,23 @@
         }
 
         if(!count(array_filter($error, fn($e) => $e !== '')))
-        {
-            $articles = [...$articles, [
-                'id' => time(),
-                'title' => $title,
-                'image' => $image,
-                'category' => $category,
-                'content' => $content
-            ]];
+        {   if($id)
+            {
+                $articles[$articleIndex]['title'] = $title;
+                $articles[$articleIndex]['image'] = $image;
+                $articles[$articleIndex]['category'] = $category;
+                $articles[$articleIndex]['content'] = $content;
+            }else
+            {
+
+                $articles = [...$articles, [
+                    'id' => time(),
+                    'title' => $title,
+                    'image' => $image,
+                    'category' => $category,
+                    'content' => $content
+                ]];
+            }
             file_put_contents($filename, json_encode($articles));
             header('Location: ./index.php');
         }

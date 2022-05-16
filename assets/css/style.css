@@ -44,6 +44,11 @@ ul{
     opacity: 0.5;
 }
 
+.small {
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+}
+
 a{
   color:inherit;
   text-decoration: none;  
@@ -58,6 +63,10 @@ a{
    flex-flow: column;
    color: var(--text-color);
 }
+
+/* .overflow {
+    overflow: hidden;
+} */
 
 /* button */
 

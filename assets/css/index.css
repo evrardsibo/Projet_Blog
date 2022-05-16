@@ -1,0 +1,51 @@
+.articles-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.article {
+    flex: 30%;
+    margin:1rem ;
+    min-height: 41rem;
+    cursor: pointer;
+}
+
+.article:hover .img-container {
+    transform: scale(1.2);
+}
+
+.article h2 {
+    padding: 1rem 1.5rem;
+}
+
+.img-container {
+    height: 30rem;
+    background-size: cover;
+    transition: transform 0.4s;
+}
+
+.newsfeed-container {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.category_container {
+    flex: 200px;
+}
+
+.category_container li {
+    margin: 1rem 0 ;
+    transition: color 0.3s;
+}
+
+.category_container li:hover {
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.cat-active {
+    color: var(--primary);
+    font-weight: 700;
+}

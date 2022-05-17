@@ -1,4 +1,5 @@
 <?php 
+$dbModel = require_once './database/models/dbModel.php';
 
 // function rsum($v, $w)
 // {
@@ -19,17 +20,19 @@
 // $d = array_reduce($x, "rsum", "Aucune donnée à réduire");
 
 
-    $filename = __DIR__ . './data/data.json';
+    //$filename = __DIR__ . './data/data.json';
+    //$statement->execute();
+    $articles = $dbModel->fetchAll();
 
-    $articles = [];
+    //$articles = [];
     $categories = [];
     $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $selectedCat = $_GET['cat'] ?? '';
     //echo $selectedCat;
 
-    if(file_exists($filename))
+    if(count($articles))
     {
-        $articles = json_decode(file_get_contents($filename),true) ?? [];
+        //$articles = json_decode(file_get_contents($filename),true) ?? [];
         $cattmp = array_map(fn ($a) => $a['category'], $articles );
         $categories = array_reduce($cattmp,function ($acc, $cat ){
             if(isset($acc[$cat]))

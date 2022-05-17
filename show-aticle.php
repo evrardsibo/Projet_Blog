@@ -17,8 +17,8 @@
                 <div class="separator">
                     <p class="article-content"><?= $article['content'] ?></p>
                     <div class="action">
-                        <a class="btn btn-danger" href="./delete-article.php?id=<?= $article['id'] ?>">Delete</a>
-                        <a class="btn btn-primary" href="./form_article.php?id=<?= $article['id'] ?>">Update</a>
+                        <a class="btn btn-danger" href="./delete-article.php?id=<?= $article['idarticles'] ?>">Delete</a>
+                        <a class="btn btn-primary" href="./form_article.php?id=<?= $article['idarticles'] ?>">Update</a>
                     </div>
                 </div>
             </div>

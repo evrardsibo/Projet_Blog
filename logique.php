@@ -1,10 +1,11 @@
 <?php 
  
+    $dbModel = require_once './database/models/dbModel.php';
     const ERROR_FIELDS = 'This field is required ';
     const ERROR_LENGTH = 'Title is too short min 5 character';
     const ERROR_CONTENT = 'Content is too short min 50 character';
     const ERROR_IMAGE ='Image must be URL valide!';
-    $filename = __DIR__ . './data/data.json';
+    //$filename = __DIR__ . './data/data.json';
     // echo '<pre>'; 
     // print_r($_SERVER);
     // echo '</pre>';
@@ -17,10 +18,10 @@
     ];
     $category = '';
 
-    if(file_exists($filename))
-    {
-        $articles = json_decode(file_get_contents($filename), true) ?? [];
-    }
+    // if(file_exists($filename))
+    // {
+    //     $articles = json_decode(file_get_contents($filename), true) ?? [];
+    // }
     
     $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     //print_r($_GET);
@@ -29,13 +30,16 @@
     if($id)
     {
         
-        $articleindex = array_search($id, array_column($articles, 'id'));
-        $article = $articles[$articleindex];
+        // $articleindex = array_search($id, array_column($articles, 'id'));
+        // $article = $articles[$articleindex];
         //print_r($article);
-        $title = $article['title'];
-        $image = $article['image'];
-        $category = $article['category'];
-        $content = $article['content'];
+        // $statementRead->bindValue(':idarticles', $id, PDO::PARAM_INT);
+        // $statementRead->execute();
+        $articles = $dbModel->fetch($id);
+        $title = $articles['title'];
+        $image = $articles['image'];
+        $category = $articles['category'];
+        $content = $articles['content'];
         //echo $content;
     }
 
@@ -88,22 +92,40 @@
         if(!count(array_filter($error, fn($e) => $e !== '')))
         {   if($id)
             {
-                $articles[$articleIndex]['title'] = $title;
-                $articles[$articleIndex]['image'] = $image;
-                $articles[$articleIndex]['category'] = $category;
-                $articles[$articleIndex]['content'] = $content;
+                $articles['title'] = $title;
+                $articles['image'] = $image;
+                $articles['category'] = $category;
+                $articles['content'] = $content;
+                $dbModel->update($articles);
+                // $statementUpadte->bindValue(':title',$articles['title'], PDO::PARAM_STR);
+                // $statementUpadte->bindValue(':image',$articles['image'], PDO::PARAM_STR);
+                // $statementUpadte->bindValue(':category',$articles['category'], PDO::PARAM_STR);
+                // $statementUpadte->bindValue(':content',$articles['content'], PDO::PARAM_STR);
+                // $statementUpadte->bindValue(':idarticles',$id, PDO::PARAM_INT);
+                // $statementUpadte->execute();
             }else
             {
 
-                $articles = [...$articles, [
-                    'id' => time(),
+                $dbModel->create([
                     'title' => $title,
                     'image' => $image,
                     'category' => $category,
                     'content' => $content
-                ]];
+                ]);
+                // $articles = [...$articles, [
+                //     'id' => time(),
+                //     'title' => $title,
+                //     'image' => $image,
+                //     'category' => $category,
+                //     'content' => $content
+                // ]];
+                // $statementCreate->bindValue(':title', $title, PDO::PARAM_STR);
+                // $statementCreate->bindValue(':image', $image, PDO::PARAM_STR);
+                // $statementCreate->bindValue(':category', $category, PDO::PARAM_STR);
+                // $statementCreate->bindValue(':content', $content, PDO::PARAM_STR);
+                // $statementCreate->execute();
             }
-            file_put_contents($filename, json_encode($articles));
+            //file_put_contents($filename, json_encode($articles));
             header('Location: ./index.php');
         }
     }

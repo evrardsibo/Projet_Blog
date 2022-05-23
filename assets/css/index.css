@@ -23,7 +23,20 @@
 .img-container {
     height: 30rem;
     background-size: cover;
-    transition: transform 0.4s;
+    transition: transform 0.2s;
+}
+
+.author {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.author p {
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .newsfeed-container {

@@ -16,10 +16,13 @@
                 <h1 class="article-title"><?= $article['title'] ?></h1>
                 <div class="separator">
                     <p class="article-content"><?= $article['content'] ?></p>
-                    <div class="action">
-                        <a class="btn btn-danger" href="./delete-article.php?id=<?= $article['idarticles'] ?>">Delete</a>
-                        <a class="btn btn-primary" href="./form_article.php?id=<?= $article['idarticles'] ?>">Update</a>
-                    </div>
+                    <p class="author"><?= $article['firstname'] . ' ' . $article['lastname']?></p>
+                    <?php if($currentuser && $currentuser['iduser'] === $article['author']) : ?>
+                        <div class="action">
+                            <a class="btn btn-danger" href="./delete-article.php?id=<?= $article['idarticles'] ?>">Delete</a>
+                            <a class="btn btn-primary" href="./form_article.php?id=<?= $article['idarticles'] ?>">Update</a>
+                        </div>
+                    <?php endif; ?>   
                 </div>
             </div>
         </div>

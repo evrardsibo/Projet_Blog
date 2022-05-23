@@ -1,4 +1,8 @@
-<?php require_once 'logique1.php'; ?>
+<?php 
+        require_once 'logique1.php'; 
+          require_once __DIR__ . './database/security.php';
+          //$currentuser = isLogin();                       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +32,11 @@
                                         <div class="img-container" style="background-image:url(<?= $a['image'] ?>) ;"></div>
                                     </div>
                                     <h2><?= $a['title'] ?></h2>
+                                    <?php if($a['author']) : ?>
+                                        <div class="author">
+                                            <p><?= $a['firstname'] . ' ' . $a['lastname'] ?></p>
+                                        </div>
+                                    <?php endif; ?>    
                                 </a>
                             <?php endforeach; ?>    
                         </div>

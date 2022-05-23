@@ -23,6 +23,8 @@ $dbModel = require_once './database/models/dbModel.php';
     //$filename = __DIR__ . './data/data.json';
     //$statement->execute();
     $articles = $dbModel->fetchAll();
+    //var_dump($articles);
+    //exit;
 
     //$articles = [];
     $categories = [];

@@ -1,6 +1,13 @@
 <?php 
  
     $dbModel = require_once './database/models/dbModel.php';
+    require_once __DIR__ . './database/security.php';
+    $currentuser = isLogin();
+    //print_r($currentuser);
+    if(!$currentuser)
+    {
+        header('Location: ./index.php');
+    }
     const ERROR_FIELDS = 'This field is required ';
     const ERROR_LENGTH = 'Title is too short min 5 character';
     const ERROR_CONTENT = 'Content is too short min 50 character';
@@ -36,6 +43,10 @@
         // $statementRead->bindValue(':idarticles', $id, PDO::PARAM_INT);
         // $statementRead->execute();
         $articles = $dbModel->fetch($id);
+        if($articles['author'] !== $currentuser['iduser'])
+        {
+            header('Location: ./index.php');
+        }
         $title = $articles['title'];
         $image = $articles['image'];
         $category = $articles['category'];
@@ -96,6 +107,7 @@
                 $articles['image'] = $image;
                 $articles['category'] = $category;
                 $articles['content'] = $content;
+                $articles['author'] = $currentuser['iduser'];
                 $dbModel->update($articles);
                 // $statementUpadte->bindValue(':title',$articles['title'], PDO::PARAM_STR);
                 // $statementUpadte->bindValue(':image',$articles['image'], PDO::PARAM_STR);
@@ -110,7 +122,8 @@
                     'title' => $title,
                     'image' => $image,
                     'category' => $category,
-                    'content' => $content
+                    'content' => $content,
+                    'author' => $currentuser['iduser']
                 ]);
                 // $articles = [...$articles, [
                 //     'id' => time(),

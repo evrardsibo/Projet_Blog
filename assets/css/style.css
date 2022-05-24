@@ -114,6 +114,7 @@ header{
     flex-flow: row nowrap;
     justify-content:space-between;
     align-items: center;
+    position: relative;
 
 }
 
@@ -129,6 +130,31 @@ header{
     padding: 5px 15px;
     transition: background-color 0.2s;
 }
+.header-mobile {
+    display: none;
+}
+
+.header-mobile-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    color: var(--text-color);
+    background:var(--background-light);
+}
+
+.show {
+    display: block;
+}
+.header-mobile-list li {
+    padding: 1rem;
+}
+
+.header-mobile-list li active {
+    color:white;
+    font-weight: 700;
+}
+
 .header-menu li:hover{
   background-color: var(--primary-dark);
 }
@@ -247,6 +273,24 @@ footer{
      flex-flow: row nowrap;
      justify-content: center;
  }
+
+ @media only screen and (max-width: 800px) {
+    .header-menu {
+        display: none;
+    }
+
+    .header-mobile {
+        display: block;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
  
  
 

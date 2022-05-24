@@ -1,7 +1,8 @@
 <?php 
+//require_once __DIR__ . './database/database.php';
  $dbModel = require_once './database/models/dbModel.php';
- require_once './database/security.php';
- $currentuser = isLogin();
+ $authmodel = require_once './database/security.php';
+ $currentuser = $authmodel->isLogin();
 //  $filename = __DIR__ . './data/data.json';
 //  $articles = [];
  $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);

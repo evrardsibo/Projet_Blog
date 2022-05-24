@@ -18,6 +18,7 @@
 .articles-list ul li 
 {
     display: flex;
+    flex-flow: row;
     justify-content: space-between;
     padding: 15px;
     border-radius: 3px;
@@ -25,3 +26,12 @@
     border: var(--border);
     margin-bottom: 5px;
 }
+
+@media only screen and (max-width: 800px) {
+    .articles-list ul li {
+        flex-flow: column;
+    }
+    .articles-action {
+        margin-top: 1rem;
+    }
+}    

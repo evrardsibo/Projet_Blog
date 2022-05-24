@@ -1,7 +1,7 @@
 <?php 
         require_once 'logique1.php'; 
-          require_once __DIR__ . './database/security.php';
-          //$currentuser = isLogin();                       
+         $authModel = require_once __DIR__ . './database/security.php';
+          $currentuser = $authModel->IsLogin();                       
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@
                         <h2><?= $selectedCat ?></h2>
                         <div class="articles-container">
                             <?php foreach($articlePercategories[$selectedCat] as $a) : ?>
-                                <a href="./show-aticle.php?id=<?= $a['idarticles'] ?> class="article block">
+                                <a href="./show-aticle.php?id=<?= $a['idarticles'] ?>" class="article block">
                                     <div class="overflow">
                                         <div class="img-container" style="background-image:url(<?= $a['image'] ?>) ;"></div>
                                     </div>

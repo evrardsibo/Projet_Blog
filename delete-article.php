@@ -2,8 +2,8 @@
   //  $filename = __DIR__ . './data/data.json';
   //  $articles = [];
   $dbModel = require_once './database/models/dbModel.php';
-  require_once __DIR__ . './database/security.php';
-  $currentUser = isLogin();
+  $authModel =require_once __DIR__ . './database/security.php';
+  $currentUser = $authModel->isLogin();
   if($currentUser)
   {
 

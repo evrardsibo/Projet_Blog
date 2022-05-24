@@ -48,6 +48,17 @@
     flex: 200px;
 }
 
+@media only screen and (max-width: 800px) {
+    .category_container {
+        display: none;
+    }
+
+    .articles-container {
+        flex-flow: column;
+        align-items: unset;
+    }
+}
+
 .category_container li {
     margin: 1rem 0 ;
     transition: color 0.3s;

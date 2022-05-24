@@ -11,7 +11,7 @@
         ]);
         //echo 'ok';
     } catch (Exception $e) {
-        echo 'error:' . $e->getMessage();
+        throw new Exception($e->getMessage());
     }
 
     return $pdo;

@@ -1,6 +1,7 @@
 <?php 
     
-    $pdo = require_once './database/database.php';
+    require_once './database/database.php';
+    $authModel = require_once __DIR__ .'./database/security.php';
     const ERROR_FIELDS = 'This fiels is required';
     const ERROR_EMAIL = 'Email unkwon !';
     const ERROR_PASSWORD = 'Password not correct !';
@@ -29,11 +30,8 @@
         }
 
         if (!array_filter($error, fn($e) => $e !== '')) {
-            $statementUser = $pdo->prepare("SELECT * FROM user WHERE email=:email");
-            $statementUser->bindValue(':email', $email);
-            $statementUser->execute();
-            $user = $statementUser->fetch();
 
+            $user = $authModel->getEmailFromUser($email);
             //echo $user;
 
             if (!$user) {
@@ -45,15 +43,7 @@
                     $error['email'] = ERROR_PASSWORD ;
                 }else
                 {
-                    $stamentSession = $pdo->prepare("INSERT INTO session VALUES (
-                        DEFAULT,
-                        :user_id
-                    )");
-
-                    $stamentSession->bindValue(':user_id', $user['iduser']);
-                    $stamentSession->execute();
-                    $sessionId = $pdo->lastInsertId();
-                    setcookie('evr', $sessionId, time() + 60 * 60 * 24 * 14, '', '', false, true);
+                    $authModel->Login($user['iduser']);
                     header('Location: ./index.php');
                 }
             }

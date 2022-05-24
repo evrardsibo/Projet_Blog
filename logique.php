@@ -1,8 +1,8 @@
 <?php 
  
     $dbModel = require_once './database/models/dbModel.php';
-    require_once __DIR__ . './database/security.php';
-    $currentuser = isLogin();
+    $authModel = require_once __DIR__ .'./database/security.php';
+    $currentuser = $authModel->IsLogin();
     //print_r($currentuser);
     if(!$currentuser)
     {

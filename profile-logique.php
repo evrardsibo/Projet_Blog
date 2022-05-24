@@ -1,9 +1,9 @@
 <?php 
-
-    require_once __DIR__ . './database/security.php';
+    require __DIR__ . './database/database.php';
+    $authModel = require_once __DIR__ . './database/security.php';
     $dbmodel = require_once __DIR__ . './database/models/dbModel.php';
     $articles = [];
-    $currentuser = isLogin();
+    $currentuser = $authModel->isLogin();
 
     if(!$currentuser)
     {

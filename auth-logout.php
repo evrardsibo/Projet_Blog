@@ -1,12 +1,11 @@
 <?php 
 
-    $pdo = require './database/database.php';
+    require './database/database.php';
+    $authModel = require_once __DIR__ .'./database/security.php';
     $sessionId = $_COOKIE['evr'];
     if($sessionId)
     {
-        $statement = $pdo->prepare("DELETE FROM session WHERE idsession = :idsession");
-        $statement->bindValue(':idsession', $sessionId);
-        $statement->execute();
-        setcookie('evr','', time() - 1);
+       $authModel->Logout($sessionId);
+
         header('Location: ./index.php');
     }

@@ -1,7 +1,19 @@
 <?php 
         require_once 'logique1.php'; 
          $authModel = require_once __DIR__ . './database/security.php';
-          $currentuser = $authModel->IsLogin();                       
+          $currentuser = $authModel->IsLogin(); 
+        //   $array = ['un'=>1,'deux'=>2,'trois'=>3,'quatre'=>4];
+        //   $iplode = join(",", $array) ;
+        //   echo $iplode; 
+        //   function nom(&$prenom)
+        //   {
+        //       $prenom = 'evr';
+        //   } 
+          
+        //   $prenom = 'sibo';
+
+        //   nom($prenom);
+        //   echo $prenom;
 ?>
 <!DOCTYPE html>
 <html lang="en">

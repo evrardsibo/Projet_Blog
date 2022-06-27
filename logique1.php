@@ -28,9 +28,9 @@ $dbModel = require_once './database/models/dbModel.php';
 
     //$articles = [];
     $categories = [];
-    $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $selectedCat = $_GET['cat'] ?? '';
-    //echo $selectedCat;
+     $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+     $selectedCat = $_GET['cat'] ?? '';
+
 
     if(count($articles))
     {

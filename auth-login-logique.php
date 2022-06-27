@@ -32,6 +32,7 @@
         if (!array_filter($error, fn($e) => $e !== '')) {
 
             $user = $authModel->getEmailFromUser($email);
+            //print_r($user);
             //echo $user;
 
             if (!$user) {
